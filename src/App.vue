@@ -6,7 +6,6 @@
     <template v-else>
       <BasicLayout />
     </template>
-
   </div>
 </template>
 

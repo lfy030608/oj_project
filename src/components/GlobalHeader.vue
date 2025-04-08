@@ -163,12 +163,6 @@ const handleSubmit = async () => {
     Message.error("修改失败：" + res.message);
   }
 }
-// setTimeout(() => {
-//   store.dispatch("user/getLoginUser", {
-//     username: "江南",
-//     userRole: accessEnum.ADMIN
-//   })
-// }, 3000);
 const doMenuClick = (key: string) => {
   router.push(
     {
@@ -189,7 +183,7 @@ const doMenuClick = (key: string) => {
 }
 
 .title {
-  color: #444;
+  color: #0d0000;
   margin-left: 16px;
 }
 </style>

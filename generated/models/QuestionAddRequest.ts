@@ -9,8 +9,8 @@ export type QuestionAddRequest = {
     content?: string;
     judgeCase?: Array<JudgeCase>;
     judgeConfig?: JudgeConfig;
+    level?: string;
     tags?: Array<string>;
     title?: string;
-    level?: string;
 };
 

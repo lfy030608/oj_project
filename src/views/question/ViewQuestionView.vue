@@ -1,7 +1,5 @@
 <template>
     <div id="questionView">
-
-
         <a-form :model="pagination" layout="inline">
             <a-col :span="7">
             <a-form-item label="难度" field="level" label-col-flex="80px">

@@ -7,9 +7,12 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { AiMessage } from './models/AiMessage';
+export type { AiRequest } from './models/AiRequest';
 export type { BaseResponse_boolean_ } from './models/BaseResponse_boolean_';
 export type { BaseResponse_CommentByIdListVO_ } from './models/BaseResponse_CommentByIdListVO_';
 export type { BaseResponse_int_ } from './models/BaseResponse_int_';
+export type { BaseResponse_List_AiMessage_ } from './models/BaseResponse_List_AiMessage_';
 export type { BaseResponse_LoginUserVO_ } from './models/BaseResponse_LoginUserVO_';
 export type { BaseResponse_long_ } from './models/BaseResponse_long_';
 export type { BaseResponse_Page_CommentVO_ } from './models/BaseResponse_Page_CommentVO_';
@@ -64,6 +67,7 @@ export type { QuestionSubmitQueryRequest } from './models/QuestionSubmitQueryReq
 export type { QuestionSubmitVO } from './models/QuestionSubmitVO';
 export type { QuestionUpdateRequest } from './models/QuestionUpdateRequest';
 export type { QuestionVO } from './models/QuestionVO';
+export type { SseEmitter } from './models/SseEmitter';
 export type { User } from './models/User';
 export type { UserAddRequest } from './models/UserAddRequest';
 export type { UserLoginRequest } from './models/UserLoginRequest';
@@ -73,6 +77,7 @@ export type { UserUpdateMyRequest } from './models/UserUpdateMyRequest';
 export type { UserUpdateRequest } from './models/UserUpdateRequest';
 export type { UserVO } from './models/UserVO';
 
+export { AiControllerService } from './services/AiControllerService';
 export { CommentControllerService } from './services/CommentControllerService';
 export { CommentThumbControllerService } from './services/CommentThumbControllerService';
 export { FileControllerService } from './services/FileControllerService';

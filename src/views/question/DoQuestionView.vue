@@ -41,7 +41,12 @@
                                     </template>
                                     <template #avatar>
                                         <a-avatar>
-                                            <img alt="avatar" src="@/assets/head.jpg" />
+                                            <template v-if="!loginUser?.userAvatar">
+                                                <img src="@/assets/head.jpg" size="large">
+                                            </template>
+                                            <template v-else>
+                                                <img size="large" :src="loginUser.userAvatar" />
+                                            </template>
                                         </a-avatar>
                                     </template>
                                 </a-comment>
@@ -79,18 +84,28 @@
                                         </template>
                                         <template #avatar>
                                             <a-avatar>
-                                                <img alt="avatar" src="@/assets/head.jpg" />
+                                                <template v-if="!fatherComment?.userAvatar">
+                                                    <img src="@/assets/head.jpg" size="large">
+                                                </template>
+                                                <template v-else>
+                                                    <img size="large" :src="fatherComment.userAvatar" />
+                                                </template>
                                             </a-avatar>
                                         </template>
                                     </a-comment>
-                                    <template v-if="expandedComments[fatherComment.id as any]">
+                                    <div class="reply" v-if="expandedComments[fatherComment.id as any]">
                                         <ul>
                                             <li v-for="(reply, replyIndex) of replyUserComment" :key="replyIndex">
                                                 <a-comment :author="reply?.userName" :content="reply?.content"
                                                     :datetime="moment(reply?.createTime).format('YYYY-MM-DD HH:mm')">
                                                     <template #avatar>
                                                         <a-avatar>
-                                                            <img alt="avatar" src="@/assets/head.jpg" />
+                                                            <template v-if="!reply?.userAvatar">
+                                                                <img src="@/assets/head.jpg" size="large">
+                                                            </template>
+                                                            <template v-else>
+                                                                <img size="large" :src="reply.userAvatar" />
+                                                            </template>
                                                         </a-avatar>
                                                     </template>
                                                     <template #actions>
@@ -122,16 +137,17 @@
                                                 </a-comment>
                                             </li>
                                         </ul>
-                                    </template>
+                                    </div>
                                 </li>
                             </ul>
                             <a-pagination v-model:current="pagination.current" :total="total"
-                                :page-size="pagination.pageSize" :show-total="true" @change="pageChange"></a-pagination>
+                                :page-size="pagination.pageSize" :show-total="false"
+                                @change="pageChange"></a-pagination>
                             <a-back-top target-container="#basic-demo" :style="{ position: 'absolute' }" />
                         </div>
                     </a-tab-pane>
-                    <a-tab-pane key="answer" title="答案">
-                        尚未开通
+                    <a-tab-pane key="aiAnswer" title="AI解答">
+                        <AiTalkServe :question-id="param.id" />
                     </a-tab-pane>
                 </a-tabs>
             </a-col>
@@ -178,7 +194,7 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue';
 import { CommentControllerService, CommentThumbControllerService, QuestionControllerService, QuestionSubmitAddRequest, QuestionSubmitControllerService, QuestionSubmitVO, QuestionVO } from '../../../generated';
-import { defineProps, onMounted, ref, watch, withDefaults, reactive } from 'vue'
+import { defineProps, onMounted, ref, watch, withDefaults, reactive, computed } from 'vue'
 import CodeEditor from "@/components/CodeEditor.vue";
 import ViewEditor from '@/components/ViewEditor.vue';
 import moment from 'moment';
@@ -189,6 +205,9 @@ import {
     IconHeartFill,
     IconExpand
 } from '@arco-design/web-vue/es/icon';
+import store from '@/store';
+import AiTalkServe from '../ai/AiTalkServe.vue';
+const loginUser = computed(() => store.state.user?.loginUser);
 interface props {
     id: string,
 }
@@ -360,7 +379,7 @@ const handleCancel = () => {
     visible.value = false;
 }
 const handleSubmit = async () => {
-    questionSubmitVo.value={}
+    questionSubmitVo.value = {}
     visible.value = true;
     const res = await QuestionSubmitControllerService.doQuestionUsingPost({
         ...requestMessage.value,
@@ -429,6 +448,7 @@ onMounted(() => {
     questionGetById()
 })
 </script>
+
 <style scoped>
 #doQuestionView {
     max-width: 100%;

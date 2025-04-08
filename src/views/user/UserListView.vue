@@ -41,7 +41,7 @@
             </a-space>
             <a-space v-else>
                 <img :src="record.userAvatar" style="width: 60px; height: 60px">
-            </a-space>>
+            </a-space>
         </template>
         <template #createTime="{ record }">
             {{ moment(record.createTime).format('YYYY-MM-DD') }}

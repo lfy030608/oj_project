@@ -2,7 +2,11 @@ import { RouteRecordRaw } from "vue-router";
 import accessEnum from "../access/accessEnum";
 import UserLayout from "../layouts/UserLayout.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
-
+import LoginView from "../views/user/LoginView.vue";
+import AddQuestionView from "@/views/question/AddQuestionView.vue";
+import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
+import ViewQuestionSubmitView from "@/views/question/ViewQuestionSubmitView.vue";
+import UserListView from "@/views/user/UserListView.vue";
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/user",
@@ -13,7 +17,7 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: "/user/login",
         name: "登录",
-        component: import("../views/user/LoginView.vue"),
+        component: LoginView,
       },
       // {
       //   path: "/user/register",
@@ -43,12 +47,12 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/question/submit/view",
     name: "题目提交列表",
-    component: import("../views/question/ViewQuestionSubmitView.vue"),
+    component: ViewQuestionSubmitView,
   },
   {
     path: "/question/view/:id",
     name: "在线做题",
-    component: import("../views/question/DoQuestionView.vue"),
+    component: () => import("@/views/question/DoQuestionView.vue"),
     props: true,
     meta: {
       access: accessEnum.USER,
@@ -58,8 +62,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/question/add",
     name: "创建题目",
-    component: () =>
-      import("../views/question/AddQuestionView.vue"),
+    component: AddQuestionView,
     meta: {
       access: accessEnum.USER
     },
@@ -67,8 +70,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/question/manage",
     name: "题目管理",
-    component: () =>
-      import("../views/question/ManageQuestionView.vue"),
+    component: ManageQuestionView,
     meta: {
       access: accessEnum.ADMIN
     },
@@ -76,8 +78,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/question/update",
     name: "题目修改",
-    component: () =>
-      import("../views/question/AddQuestionView.vue"),
+    component: AddQuestionView,
     meta: {
       access: accessEnum.USER,
       hideInMenu: true,
@@ -86,11 +87,9 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/about/user/list",
     name: "用户列表",
-    component: () =>
-      import("../views/user/UserListView.vue"),
+    component: UserListView,
     meta: {
       access: accessEnum.ADMIN,
-
     },
   },
   {

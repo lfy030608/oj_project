@@ -3,7 +3,7 @@
         <a-tabs default-active-key="login">
             <a-tab-pane key="login" title="登录">
                 <a-form class="login-form" style="max-width: 480px; margin: 0 auto" label-align="left" auto-label-width
-                    :model="loginForm" @submit="handleSubmit">
+                    :model="loginForm" @submit="handleLogin">
                     <a-form-item field="userAccount" label="用户名">
                         <a-input v-model="loginForm.userAccount" placeholder="请输入用户名" />
                     </a-form-item>
@@ -67,7 +67,7 @@ const handleRegister = async () => {
         Message.error("注册失败：" + res.message)
     }
 }
-const handleSubmit = async () => {
+const handleLogin = async () => {
     const res = await UserControllerService.userLoginUsingPost(loginForm.value)
     if (res.code === 0) {
         await store.dispatch("user/getLoginUser")

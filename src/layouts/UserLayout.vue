@@ -1,6 +1,7 @@
 <template>
     <div id="userLayout">
         <a-layout style="min-height: 100vh">
+            <a-layout-header class="header"></a-layout-header>
             <a-layout-content class="content">
                 <a-space>
                     <img class="log" src="@/assets/log.jpg" />
@@ -8,7 +9,9 @@
                     <router-view />
                 </a-space>
             </a-layout-content>
-            <a-layout-footer class="footer">小白程序员</a-layout-footer>
+            <a-layout-footer class="footer">
+                <a href="https://example.com" target="_blank">宇博客</a>
+            </a-layout-footer>
         </a-layout>
     </div>
 </template>
